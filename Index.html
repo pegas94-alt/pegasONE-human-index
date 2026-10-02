@@ -1,6 +1,11 @@
 
 <!DOCTYPE html>
 <html lang="cs">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+<html lang="cs">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -393,4 +398,27 @@
   }
       </script>
 </body>
+</html>
+<title>PegasONE</title>
+  </head>
+  <body>
+    <h1>PegasONE</h1>
+    <p>Tvůj chytrý prostor pro řešení problémů.</p>
+    <textarea id="problem" placeholder="Napiš, s čím potřebuješ pomoct..."></textarea>
+    <button onclick="findSolution()">Najít řešení</button>
+    <div id="result"></div>
+    <script>
+function findSolution() {
+    const problem = document.getElementById("problem").value.trim();
+    const result = document.getElementById("result");
+
+    if (!problem) {
+        result.textContent = "Nejdřív napiš, co chceš vyřešit.";
+        return;
+    }
+
+    result.textContent = "PegasONE: Přemýšlím nad řešením…";
+}
+    </script>
+  </body>
 </html>

@@ -124,11 +124,43 @@
 
   </main>
 
-  <script>
-    function startIndex() {
-      alert("PegasONE Human Index právě začíná.");
-    }
-  </script>
+<script>
+  function startIndex() {
+    const card = document.querySelector(".card");
 
+    card.innerHTML = `
+      <h1>Otázka 1</h1>
+
+      <p>
+        Když narazíš na problém, který neznáš,
+        co uděláš jako první?
+      </p>
+
+      <button onclick="answer(1)">
+        A — Vzdám to
+      </button>
+
+      <button onclick="answer(2)">
+        B — Najdu návod
+      </button>
+
+      <button onclick="answer(3)">
+        C — Požádám někoho o pomoc
+      </button>
+
+      <button onclick="answer(4)">
+        D — Zkusím vlastní řešení
+      </button>
+
+      <button onclick="answer(5)">
+        E — Zkusím několik různých řešení
+      </button>
+    `;
+  }
+
+  function answer(value) {
+    alert("Tvoje odpověď: " + value);
+  }
+      </script>
 </body>
 </html>

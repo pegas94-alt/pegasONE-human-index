@@ -1,326 +1,75 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cs">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>UHP Wallet</title>
-
-<style>
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  background: #080c12;
-  color: white;
-  font-family: Arial, sans-serif;
-}
-
-.app {
-  max-width: 700px;
-  margin: auto;
-  padding: 20px;
-}
-
-.header {
-  text-align: center;
-  margin-bottom: 25px;
-}
-
-.logo {
-  font-size: 27px;
-  font-weight: bold;
-}
-
-.subtitle {
-  color: #8994a5;
-  margin-top: 6px;
-}
-
-.card {
-  background: #121923;
-  border-radius: 22px;
-  padding: 22px;
-  margin-bottom: 18px;
-  box-shadow: 0 12px 35px rgba(0,0,0,.25);
-}
-
-.balance-label {
-  color: #8d98a8;
-}
-
-.balance {
-  font-size: 45px;
-  font-weight: bold;
-  margin: 8px 0;
-}
-
-.token {
-  color: #55e6a5;
-}
-
-.address {
-  background: #0a0f16;
-  padding: 12px;
-  border-radius: 12px;
-  font-size: 12px;
-  word-break: break-all;
-  color: #aeb8c7;
-}
-
-h2 {
-  margin-top: 0;
-}
-
-input {
-  width: 100%;
-  padding: 15px;
-  margin: 7px 0;
-  border: none;
-  border-radius: 12px;
-  background: #080c12;
-  color: white;
-  font-size: 15px;
-}
-
-button {
-  width: 100%;
-  padding: 15px;
-  margin-top: 10px;
-  border: none;
-  border-radius: 13px;
-  background: #55e6a5;
-  color: #07100b;
-  font-weight: bold;
-  font-size: 16px;
-}
-
-button:active {
-  transform: scale(.98);
-}
-
-.transaction {
-  border-bottom: 1px solid #27303c;
-  padding: 14px 0;
-}
-
-.transaction:last-child {
-  border-bottom: none;
-}
-
-.receive {
-  color: #55e6a5;
-}
-
-.send {
-  color: #ff7777;
-}
-
-.small {
-  color: #7f8a99;
-  font-size: 12px;
-  margin-top: 5px;
-}
-
-.status {
-  margin-top: 15px;
-  color: #55e6a5;
-}
-</style>
-</head>
-
-<body>
-
-<div class="app">
-
-  <div class="header">
-
-    <div class="logo">
-      ♾️ UHP WALLET
-    </div>
-
-    <div class="subtitle">
-      Unlimited Human Progress Testnet
-    </div>
-
-  </div>
-
-
-  <!-- BALANCE -->
-
-  <div class="card">
-
-    <div class="balance-label">
-      Available Balance
-    </div>
-
-    <div class="balance">
-      <span id="balance">1000</span>
-      <span class="token">UHP</span>
-    </div>
-
-    <div class="address">
-      Wallet Address:<br>
-      <span id="address">
-        UHP7X9A3B2C8D1E4F6G5H8J2K
-      </span>
-    </div>
-
-  </div>
-
-
-  <!-- SEND -->
-
-  <div class="card">
-
-    <h2>Send UHP</h2>
-
-    <input
-      id="recipient"
-      placeholder="Recipient address"
-    >
-
-    <input
-      id="amount"
-      type="number"
-      placeholder="Amount"
-    >
-
-    <button onclick="sendUHP()">
-      Send UHP
-    </button>
-
-    <div id="status" class="status"></div>
-
-  </div>
-
-
-  <!-- RECEIVE -->
-
-  <div class="card">
-
-    <h2>Receive UHP</h2>
-
-    <div class="address">
-      <span id="receiveAddress">
-        UHP7X9A3B2C8D1E4F6G5H8J2K
-      </span>
-    </div>
-
-    <button onclick="copyAddress()">
-      Copy Address
-    </button>
-
-  </div>
-
-
-  <!-- TRANSACTIONS -->
-
-  <div class="card">
-
-    <h2>Transaction History</h2>
-
-    <div id="transactions">
-
-      <div class="transaction">
-
-        <div class="receive">
-          +1000 UHP
-        </div>
-
-        <div class="small">
-          Testnet reward
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</div>
-
-
-<script>
-
-let balance = 1000;
-
-function sendUHP() {
-
-  const recipient =
-    document.getElementById("recipient").value.trim();
-
-  const amount =
-    Number(document.getElementById("amount").value);
-
-  const status =
-    document.getElementById("status");
-
-  if (!recipient) {
-    status.innerText =
-      "Enter a recipient address.";
-    return;
-  }
-
-  if (!amount || amount <= 0) {
-    status.innerText =
-      "Enter a valid amount.";
-    return;
-  }
-
-  if (amount > balance) {
-    status.innerText =
-      "Insufficient UHP balance.";
-    return;
-  }
-
-  balance -= amount;
-
-  document.getElementById("balance").innerText =
-    balance;
-
-  const transaction =
-    document.createElement("div");
-
-  transaction.className =
-    "transaction";
-
-  transaction.innerHTML = `
-    <div class="send">
-      -${amount} UHP
-    </div>
-
-    <div class="small">
-      To: ${recipient}
-    </div>
-  `;
-
-  document
-    .getElementById("transactions")
-    .prepend(transaction);
-
-  status.innerText =
-    "Transaction added to UHP Testnet.";
-
-  document.getElementById("recipient").value = "";
-  document.getElementById("amount").value = "";
-}
-
-
-function copyAddress() {
-
-  const address =
-    document.getElementById("address").innerText;
-
-  navigator.clipboard.writeText(address);
-
-  document.getElementById("status").innerText =
-    "Wallet address copied.";
-}
-
-</script>
-
-</body>
-</html>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LIFE:UP</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #10152b, #24104f);
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 430px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 48px;
+      margin: 0;
+      letter-spacing: 2px;
+    }
+
+    .subtitle {
+      color: #b9b9d6;
+      margin-bottom: 35px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 24px;
+      padding: 25px;
+      margin-bottom: 18px;
+    }
+
+    .stats {
+      display: flex;
+      gap: 12px;
+    }
+
+    .stat {
+      flex: 1;
+      background: rgba(255,255,255,0.06);
+      border-radius: 18px;
+      padding: 18px 10px;
+    }
+
+    .number {
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .label {
+      color: #aaaac4;
+      font-size: 13px;
+      margin-top: 5px;
+    }
+
+    .quest {
+      font-size: 18px;
+     

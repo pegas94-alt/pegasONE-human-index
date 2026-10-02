@@ -125,41 +125,99 @@
   </main>
 
 <script>
+  let answers = [];
+
+  const questions = [
+    {
+      text: "Když narazíš na problém, který neznáš, co uděláš jako první?",
+      options: [
+        "Vzdám to.",
+        "Najdu návod.",
+        "Požádám někoho o pomoc.",
+        "Zkusím vlastní řešení.",
+        "Zkusím několik různých řešení."
+      ]
+    },
+    {
+      text: "Když dostaneš úkol bez přesného návodu, co uděláš?",
+      options: [
+        "Nevím, kde začít.",
+        "Počkám, až mi někdo poradí.",
+        "Najdu si informace.",
+        "Vymyslím vlastní postup.",
+        "Vymyslím několik možných postupů a vyberu nejlepší."
+      ]
+    }
+  ];
+
+  let currentQuestion = 0;
+
   function startIndex() {
+    showQuestion();
+  }
+
+  function showQuestion() {
+    const question = questions[currentQuestion];
     const card = document.querySelector(".card");
 
+    let buttons = "";
+
+    question.options.forEach((option, index) => {
+      buttons += `
+        <button onclick="answer(${index + 1})">
+          ${option}
+        </button>
+      `;
+    });
+
     card.innerHTML = `
-      <h1>Otázka 1</h1>
+      <h1>Otázka ${currentQuestion + 1} / ${questions.length}</h1>
 
-      <p>
-        Když narazíš na problém, který neznáš,
-        co uděláš jako první?
-      </p>
+      <p>${question.text}</p>
 
-      <button onclick="answer(1)">
-        A — Vzdám to
-      </button>
-
-      <button onclick="answer(2)">
-        B — Najdu návod
-      </button>
-
-      <button onclick="answer(3)">
-        C — Požádám někoho o pomoc
-      </button>
-
-      <button onclick="answer(4)">
-        D — Zkusím vlastní řešení
-      </button>
-
-      <button onclick="answer(5)">
-        E — Zkusím několik různých řešení
-      </button>
+      ${buttons}
     `;
   }
 
   function answer(value) {
-    alert("Tvoje odpověď: " + value);
+    answers.push(value);
+
+    currentQuestion++;
+
+    if (currentQuestion < questions.length) {
+      showQuestion();
+    } else {
+      showResult();
+    }
+  }
+
+  function showResult() {
+    const card = document.querySelector(".card");
+
+    const total =
+      answers.reduce((sum, value) => sum + value, 0);
+
+    const average =
+      Math.round((total / answers.length) * 20);
+
+    card.innerHTML = `
+      <h1>První část dokončena 🪽</h1>
+
+      <p>
+        Tvoje první skóre Human Indexu:
+      </p>
+
+      <h1>${average} / 100</h1>
+
+      <p>
+        Toto zatím není hodnocení člověka.
+        Je to pouze první experimentální výsledek.
+      </p>
+
+      <button onclick="location.reload()">
+        ZAČÍT ZNOVU
+      </button>
+    `;
   }
       </script>
 </body>

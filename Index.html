@@ -1,40 +1,253 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PegasONE</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unlimited Human Progress</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0b0f14;
+  color: white;
+}
+
+.container {
+  max-width: 700px;
+  margin: auto;
+  padding: 25px 18px 50px;
+}
+
+.logo {
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.subtitle {
+  text-align: center;
+  color: #8d98a8;
+  margin-bottom: 30px;
+}
+
+.index-card {
+  background: linear-gradient(145deg, #151c25, #0f141b);
+  border-radius: 25px;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 15px 40px rgba(0,0,0,.35);
+  margin-bottom: 20px;
+}
+
+.index-title {
+  color: #9ba7b7;
+  font-size: 15px;
+  letter-spacing: 2px;
+}
+
+.score {
+  font-size: 90px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.status {
+  font-size: 18px;
+  color: #55e6a5;
+}
+
+.progress {
+  height: 12px;
+  background: #252d38;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-top: 25px;
+}
+
+.progress-bar {
+  width: 73%;
+  height: 100%;
+  background: linear-gradient(90deg,#55e6a5,#4db8ff);
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.stat {
+  background: #151c25;
+  border-radius: 18px;
+  padding: 20px;
+}
+
+.stat-name {
+  color: #8d98a8;
+  font-size: 14px;
+}
+
+.stat-value {
+  font-size: 30px;
+  font-weight: bold;
+  margin-top: 8px;
+}
+
+.action {
+  margin-top: 20px;
+  background: #151c25;
+  border-radius: 20px;
+  padding: 22px;
+}
+
+.action h2 {
+  margin-top: 0;
+}
+
+button {
+  width: 100%;
+  border: none;
+  border-radius: 14px;
+  padding: 16px;
+  margin-top: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  background: #55e6a5;
+  color: #07100b;
+}
+
+button:active {
+  transform: scale(.98);
+}
+
+.result {
+  margin-top: 15px;
+  color: #b9c3d0;
+  line-height: 1.5;
+}
+</style>
 </head>
 
 <body>
-    <h1>PegasONE</h1>
 
-    <p>Tvůj chytrý prostor pro řešení problémů.</p>
+<div class="container">
 
-    <textarea
-        id="problem"
-        placeholder="Napiš, s čím potřebuješ pomoct..."
-    ></textarea>
+  <div class="logo">
+    UNLIMITED HUMAN PROGRESS
+  </div>
 
-    <br><br>
+  <div class="subtitle">
+    Human Index • Personal Progress Engine
+  </div>
 
-    <button onclick="findSolution()">Najít řešení</button>
+  <div class="index-card">
 
-    <div id="result"></div>
+    <div class="index-title">
+      HUMAN INDEX
+    </div>
 
-    <script>
-        function findSolution() {
-            const problem = document.getElementById("problem").value.trim();
-            const result = document.getElementById("result");
+    <div class="score" id="score">
+      73
+    </div>
 
-            if (!problem) {
-                result.textContent = "Nejdřív napiš, co chceš vyřešit.";
-                return;
-            }
+    <div class="status">
+      Potenciál je aktivní
+    </div>
 
-            result.textContent =
-                "PegasONE: Přemýšlím nad řešením…";
-        }
-    </script>
+    <div class="progress">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+  </div>
+
+  <div class="stats">
+
+    <div class="stat">
+      <div class="stat-name">🧠 Fokus</div>
+      <div class="stat-value">64</div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-name">⚡ Energie</div>
+      <div class="stat-value">81</div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-name">📚 Učení</div>
+      <div class="stat-value">79</div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-name">😴 Regenerace</div>
+      <div class="stat-value">58</div>
+    </div>
+
+  </div>
+
+  <div class="action">
+
+    <h2>🚀 Today's Progress</h2>
+
+    <div>
+      Jak se dnes cítíš?
+    </div>
+
+    <button onclick="energy(90)">
+      ⚡ Mám hodně energie
+    </button>
+
+    <button onclick="energy(60)">
+      🔋 Mám normální energii
+    </button>
+
+    <button onclick="energy(30)">
+      💤 Jsem vyčerpaný
+    </button>
+
+    <div class="result" id="result"></div>
+
+  </div>
+
+</div>
+
+<script>
+
+function energy(value) {
+
+  let score = Math.round(
+    (value + 64 + 79 + 58) / 4
+  );
+
+  document.getElementById("score").innerText = score;
+
+  document.getElementById("progressBar").style.width =
+    score + "%";
+
+  let message = "";
+
+  if (score >= 80) {
+    message =
+      "🔥 Dnešní potenciál je vysoký. Vyber jeden důležitý cíl a začni.";
+  } 
+  else if (score >= 60) {
+    message =
+      "⚡ Stabilní stav. Ideální chvíle pro menší, soustředěný krok.";
+  } 
+  else {
+    message =
+      "🧘 Regenerace je dnes důležitější než výkon. Udělej jeden malý krok.";
+  }
+
+  document.getElementById("result").innerText = message;
+}
+
+</script>
+
 </body>
 </html>

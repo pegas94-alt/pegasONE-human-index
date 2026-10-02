@@ -157,7 +157,117 @@
   }
 
   function showQuestion() {
-    const question = questions[currentQuestion];
+    const question = questions[const questions = [
+  {
+    text: "Když narazíš na problém, který neznáš, co uděláš jako první?",
+    options: [
+      { text: "Vzdám to.", scores: { thinking: 0 } },
+      { text: "Najdu návod.", scores: { thinking: 2, growth: 2 } },
+      { text: "Požádám někoho o pomoc.", scores: { teamwork: 3, growth: 2 } },
+      { text: "Zkusím vlastní řešení.", scores: { thinking: 3, creativity: 3, practicality: 2 } },
+      { text: "Zkusím několik různých řešení.", scores: { thinking: 4, creativity: 4, practicality: 3, growth: 2 } }
+    ]
+  },
+
+  {
+    text: "Když dostaneš úkol bez přesného návodu, co uděláš?",
+    options: [
+      { text: "Nevím, kde začít.", scores: { thinking: 0 } },
+      { text: "Počkám, až mi někdo poradí.", scores: { teamwork: 2 } },
+      { text: "Najdu si informace.", scores: { thinking: 3, growth: 3 } },
+      { text: "Vymyslím vlastní postup.", scores: { creativity: 3, practicality: 3 } },
+      { text: "Vymyslím několik postupů a vyberu nejlepší.", scores: { thinking: 4, creativity: 4, practicality: 4 } }
+    ]
+  },
+
+  {
+    text: "Když se ti něco několikrát nepovede, co uděláš?",
+    options: [
+      { text: "Přestanu.", scores: { persistence: 0 } },
+      { text: "Dám si pauzu.", scores: { growth: 1 } },
+      { text: "Požádám o radu.", scores: { teamwork: 2, growth: 2 } },
+      { text: "Zkusím to znovu jinak.", scores: { persistence: 4, growth: 3 } },
+      { text: "Analyzuji chybu a hledám nové řešení.", scores: { persistence: 5, thinking: 4, growth: 5 } }
+    ]
+  },
+
+  {
+    text: "Když vidíš člověka, který má problém, co uděláš?",
+    options: [
+      { text: "Nevšímám si toho.", scores: {} },
+      { text: "Počkám, jestli pomoc potřebuje.", scores: { empathy: 2 } },
+      { text: "Zeptám se, jestli mu můžu pomoct.", scores: { empathy: 4, teamwork: 3 } },
+      { text: "Snažím se problém vyřešit společně s ním.", scores: { empathy: 4, teamwork: 4, practicality: 2 } },
+      { text: "Pomůžu mu a zároveň se snažím pochopit, proč problém vznikl.", scores: { empathy: 5, teamwork: 4, thinking: 3, growth: 3 } }
+    ]
+  },
+
+  {
+    text: "Když máš důležitý cíl, jak postupuješ?",
+    options: [
+      { text: "Začnu, ale často nedokončím.", scores: { discipline: 1 } },
+      { text: "Čekám na správnou náladu.", scores: { discipline: 1 } },
+      { text: "Udělám si jednoduchý plán.", scores: { discipline: 3, practicality: 2 } },
+      { text: "Rozdělím cíl na menší kroky.", scores: { discipline: 4, practicality: 4 } },
+      { text: "Naplánuji kroky, termíny a průběžně kontroluji výsledek.", scores: { discipline: 5, practicality: 5, persistence: 3 } }
+    ]
+  },
+
+  {
+    text: "Když máš málo peněz nebo prostředků, jak reaguješ?",
+    options: [
+      { text: "Nevím, co dělat.", scores: {} },
+      { text: "Snažím se najít někoho, kdo poradí.", scores: { teamwork: 2 } },
+      { text: "Hledám levnější variantu.", scores: { practicality: 3 } },
+      { text: "Vymyslím jiné řešení.", scores: { creativity: 4, practicality: 4 } },
+      { text: "Najdu několik možností a porovnám jejich výhody a rizika.", scores: { thinking: 4, creativity: 4, practicality: 5 } }
+    ]
+  },
+
+  {
+    text: "Jak reaguješ na kritiku?",
+    options: [
+      { text: "Beru ji osobně.", scores: {} },
+      { text: "Je pro mě těžké ji přijmout.", scores: { growth: 1 } },
+      { text: "Poslechnu si ji.", scores: { growth: 2 } },
+      { text: "Zamyslím se, jestli má druhý člověk pravdu.", scores: { thinking: 3, growth: 4 } },
+      { text: "Snažím se z ní zjistit, co můžu příště udělat lépe.", scores: { thinking: 4, growth: 5 } }
+    ]
+  },
+
+  {
+    text: "Když pracuješ v týmu, jaká role ti nejvíce vyhovuje?",
+    options: [
+      { text: "Raději pracuji sám.", scores: { practicality: 1 } },
+      { text: "Dělám úkol, který mi někdo zadá.", scores: { teamwork: 2 } },
+      { text: "Pomáhám ostatním.", scores: { teamwork: 4, empathy: 3 } },
+      { text: "Přicházím s nápady.", scores: { teamwork: 3, creativity: 4 } },
+      { text: "Pomáhám týmu najít nejlepší cestu k cíli.", scores: { teamwork: 5, thinking: 4, practicality: 3 } }
+    ]
+  },
+
+  {
+    text: "Když máš volný čas, co tě nejčastěji láká?",
+    options: [
+      { text: "Odpočinek.", scores: {} },
+      { text: "Zábava.", scores: { growth: 1 } },
+      { text: "Něco nového se naučit.", scores: { growth: 4 } },
+      { text: "Něco vytvořit.", scores: { creativity: 4, practicality: 3 } },
+      { text: "Vymyslet nebo vytvořit něco, co jsem ještě nikdy nezkusil.", scores: { creativity: 5, growth: 4 } }
+    ]
+  },
+
+  {
+    text: "Když se musíš rychle rozhodnout, co uděláš?",
+    options: [
+      { text: "Rozhodnutí raději odložím.", scores: {} },
+      { text: "Vyberu první možnost.", scores: { practicality: 1 } },
+      { text: "Zvážím hlavní výhody a nevýhody.", scores: { thinking: 3 } },
+      { text: "Vyberu možnost s nejlepším poměrem rizika a výsledku.", scores: { thinking: 4, practicality: 4 } },
+      { text: "Rychle zjistím klíčové informace a potom rozhodnu.", scores: { thinking: 5, practicality: 4, discipline: 3 } }
+    ]
+  }
+];];
     const card = document.querySelector(".card");
 
     let buttons = "";

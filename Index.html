@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="cs">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Unlimited Human Progress</title>
+
+<title>UHP Wallet</title>
 
 <style>
 * {
@@ -12,239 +13,311 @@
 
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: #0b0f14;
+  background: #080c12;
   color: white;
+  font-family: Arial, sans-serif;
 }
 
-.container {
+.app {
   max-width: 700px;
   margin: auto;
-  padding: 25px 18px 50px;
-}
-
-.logo {
-  text-align: center;
-  font-size: 30px;
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
-.subtitle {
-  text-align: center;
-  color: #8d98a8;
-  margin-bottom: 30px;
-}
-
-.index-card {
-  background: linear-gradient(145deg, #151c25, #0f141b);
-  border-radius: 25px;
-  padding: 30px;
-  text-align: center;
-  box-shadow: 0 15px 40px rgba(0,0,0,.35);
-  margin-bottom: 20px;
-}
-
-.index-title {
-  color: #9ba7b7;
-  font-size: 15px;
-  letter-spacing: 2px;
-}
-
-.score {
-  font-size: 90px;
-  font-weight: bold;
-  margin: 10px 0;
-}
-
-.status {
-  font-size: 18px;
-  color: #55e6a5;
-}
-
-.progress {
-  height: 12px;
-  background: #252d38;
-  border-radius: 20px;
-  overflow: hidden;
-  margin-top: 25px;
-}
-
-.progress-bar {
-  width: 73%;
-  height: 100%;
-  background: linear-gradient(90deg,#55e6a5,#4db8ff);
-}
-
-.stats {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
-}
-
-.stat {
-  background: #151c25;
-  border-radius: 18px;
   padding: 20px;
 }
 
-.stat-name {
-  color: #8d98a8;
-  font-size: 14px;
+.header {
+  text-align: center;
+  margin-bottom: 25px;
 }
 
-.stat-value {
-  font-size: 30px;
+.logo {
+  font-size: 27px;
   font-weight: bold;
-  margin-top: 8px;
 }
 
-.action {
-  margin-top: 20px;
-  background: #151c25;
-  border-radius: 20px;
+.subtitle {
+  color: #8994a5;
+  margin-top: 6px;
+}
+
+.card {
+  background: #121923;
+  border-radius: 22px;
   padding: 22px;
+  margin-bottom: 18px;
+  box-shadow: 0 12px 35px rgba(0,0,0,.25);
 }
 
-.action h2 {
+.balance-label {
+  color: #8d98a8;
+}
+
+.balance {
+  font-size: 45px;
+  font-weight: bold;
+  margin: 8px 0;
+}
+
+.token {
+  color: #55e6a5;
+}
+
+.address {
+  background: #0a0f16;
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  word-break: break-all;
+  color: #aeb8c7;
+}
+
+h2 {
   margin-top: 0;
+}
+
+input {
+  width: 100%;
+  padding: 15px;
+  margin: 7px 0;
+  border: none;
+  border-radius: 12px;
+  background: #080c12;
+  color: white;
+  font-size: 15px;
 }
 
 button {
   width: 100%;
+  padding: 15px;
+  margin-top: 10px;
   border: none;
-  border-radius: 14px;
-  padding: 16px;
-  margin-top: 12px;
-  font-size: 16px;
-  font-weight: bold;
+  border-radius: 13px;
   background: #55e6a5;
   color: #07100b;
+  font-weight: bold;
+  font-size: 16px;
 }
 
 button:active {
   transform: scale(.98);
 }
 
-.result {
+.transaction {
+  border-bottom: 1px solid #27303c;
+  padding: 14px 0;
+}
+
+.transaction:last-child {
+  border-bottom: none;
+}
+
+.receive {
+  color: #55e6a5;
+}
+
+.send {
+  color: #ff7777;
+}
+
+.small {
+  color: #7f8a99;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.status {
   margin-top: 15px;
-  color: #b9c3d0;
-  line-height: 1.5;
+  color: #55e6a5;
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="app">
 
-  <div class="logo">
-    UNLIMITED HUMAN PROGRESS
-  </div>
+  <div class="header">
 
-  <div class="subtitle">
-    Human Index • Personal Progress Engine
-  </div>
-
-  <div class="index-card">
-
-    <div class="index-title">
-      HUMAN INDEX
+    <div class="logo">
+      ♾️ UHP WALLET
     </div>
 
-    <div class="score" id="score">
-      73
-    </div>
-
-    <div class="status">
-      Potenciál je aktivní
-    </div>
-
-    <div class="progress">
-      <div class="progress-bar" id="progressBar"></div>
+    <div class="subtitle">
+      Unlimited Human Progress Testnet
     </div>
 
   </div>
 
-  <div class="stats">
 
-    <div class="stat">
-      <div class="stat-name">🧠 Fokus</div>
-      <div class="stat-value">64</div>
+  <!-- BALANCE -->
+
+  <div class="card">
+
+    <div class="balance-label">
+      Available Balance
     </div>
 
-    <div class="stat">
-      <div class="stat-name">⚡ Energie</div>
-      <div class="stat-value">81</div>
+    <div class="balance">
+      <span id="balance">1000</span>
+      <span class="token">UHP</span>
     </div>
 
-    <div class="stat">
-      <div class="stat-name">📚 Učení</div>
-      <div class="stat-value">79</div>
-    </div>
-
-    <div class="stat">
-      <div class="stat-name">😴 Regenerace</div>
-      <div class="stat-value">58</div>
+    <div class="address">
+      Wallet Address:<br>
+      <span id="address">
+        UHP7X9A3B2C8D1E4F6G5H8J2K
+      </span>
     </div>
 
   </div>
 
-  <div class="action">
 
-    <h2>🚀 Today's Progress</h2>
+  <!-- SEND -->
 
-    <div>
-      Jak se dnes cítíš?
-    </div>
+  <div class="card">
 
-    <button onclick="energy(90)">
-      ⚡ Mám hodně energie
+    <h2>Send UHP</h2>
+
+    <input
+      id="recipient"
+      placeholder="Recipient address"
+    >
+
+    <input
+      id="amount"
+      type="number"
+      placeholder="Amount"
+    >
+
+    <button onclick="sendUHP()">
+      Send UHP
     </button>
 
-    <button onclick="energy(60)">
-      🔋 Mám normální energii
+    <div id="status" class="status"></div>
+
+  </div>
+
+
+  <!-- RECEIVE -->
+
+  <div class="card">
+
+    <h2>Receive UHP</h2>
+
+    <div class="address">
+      <span id="receiveAddress">
+        UHP7X9A3B2C8D1E4F6G5H8J2K
+      </span>
+    </div>
+
+    <button onclick="copyAddress()">
+      Copy Address
     </button>
 
-    <button onclick="energy(30)">
-      💤 Jsem vyčerpaný
-    </button>
+  </div>
 
-    <div class="result" id="result"></div>
+
+  <!-- TRANSACTIONS -->
+
+  <div class="card">
+
+    <h2>Transaction History</h2>
+
+    <div id="transactions">
+
+      <div class="transaction">
+
+        <div class="receive">
+          +1000 UHP
+        </div>
+
+        <div class="small">
+          Testnet reward
+        </div>
+
+      </div>
+
+    </div>
 
   </div>
 
 </div>
 
+
 <script>
 
-function energy(value) {
+let balance = 1000;
 
-  let score = Math.round(
-    (value + 64 + 79 + 58) / 4
-  );
+function sendUHP() {
 
-  document.getElementById("score").innerText = score;
+  const recipient =
+    document.getElementById("recipient").value.trim();
 
-  document.getElementById("progressBar").style.width =
-    score + "%";
+  const amount =
+    Number(document.getElementById("amount").value);
 
-  let message = "";
+  const status =
+    document.getElementById("status");
 
-  if (score >= 80) {
-    message =
-      "🔥 Dnešní potenciál je vysoký. Vyber jeden důležitý cíl a začni.";
-  } 
-  else if (score >= 60) {
-    message =
-      "⚡ Stabilní stav. Ideální chvíle pro menší, soustředěný krok.";
-  } 
-  else {
-    message =
-      "🧘 Regenerace je dnes důležitější než výkon. Udělej jeden malý krok.";
+  if (!recipient) {
+    status.innerText =
+      "Enter a recipient address.";
+    return;
   }
 
-  document.getElementById("result").innerText = message;
+  if (!amount || amount <= 0) {
+    status.innerText =
+      "Enter a valid amount.";
+    return;
+  }
+
+  if (amount > balance) {
+    status.innerText =
+      "Insufficient UHP balance.";
+    return;
+  }
+
+  balance -= amount;
+
+  document.getElementById("balance").innerText =
+    balance;
+
+  const transaction =
+    document.createElement("div");
+
+  transaction.className =
+    "transaction";
+
+  transaction.innerHTML = `
+    <div class="send">
+      -${amount} UHP
+    </div>
+
+    <div class="small">
+      To: ${recipient}
+    </div>
+  `;
+
+  document
+    .getElementById("transactions")
+    .prepend(transaction);
+
+  status.innerText =
+    "Transaction added to UHP Testnet.";
+
+  document.getElementById("recipient").value = "";
+  document.getElementById("amount").value = "";
+}
+
+
+function copyAddress() {
+
+  const address =
+    document.getElementById("address").innerText;
+
+  navigator.clipboard.writeText(address);
+
+  document.getElementById("status").innerText =
+    "Wallet address copied.";
 }
 
 </script>

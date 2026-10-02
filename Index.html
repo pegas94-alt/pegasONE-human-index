@@ -275,7 +275,7 @@
     question.options.forEach((option, index) => {
       buttons += `
         <button onclick="answer(${index + 1})">
-          ${option}
+          ${option.text}
         </button>
       `;
     });
